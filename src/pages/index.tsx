@@ -38,7 +38,11 @@ export default function Home() {
             </a>
           </div>
         </div>
-
+        <div className={ `${styles.center} ${styles.card}`}>
+          <h2>
+            Hello world
+          </h2>
+        </div>
         <div className={styles.center}>
           <Image
             className={styles.logo}
