@@ -5,9 +5,9 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>Blog - recent posts</title>
+        <title>Author</title>
       </Head>
-      <p>Content will be here</p>
+      <p>About me</p>
     </Layout>
   );
 }
