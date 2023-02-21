@@ -52,7 +52,7 @@ export const getFileBySlug = async (path: string, slug: string) => {
   const { data, content: markdownContent } = matter(fileContents);
   let content = "";
   if (markdownContent) {
-    content = await (await remark().use(html).process(markdownContent)).toString();
+    content = (await remark().use(html).process(markdownContent)).toString();
   }
   return {
     ...data,

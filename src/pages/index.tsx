@@ -1,6 +1,5 @@
 import Layout from "@/components/layout";
 import { Article, getList } from "@/lib/markdownParser";
-import { getAllProjects } from "@/services/projects";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
