@@ -1,7 +1,12 @@
 import { join } from "path";
 import fs from "fs";
+// mater = takes a string or object with content property, extracts and parses front-matter from the string, then returns an object with data
 import matter from "gray-matter";
-// Takes a string or object with content property, extracts and parses front-matter from the string, then returns an object with data
+// processor with support for parsing markdown input and serializing markdown as output
+// import remark from "remark";
+// plugin to add support for serializing HTML.
+import html from "remark-html";
+import { remark } from "remark";
 
 export interface Data {
   [key: string]: any;
@@ -13,7 +18,12 @@ export interface Project {
   date: string;
   tags: string[];
   slug: string;
-  createAt: number | null;
+  createdAt: number | null;
+}
+
+export interface Article extends Project {
+  cover: string;
+  content: string;
 }
 
 export const getList = (path: string) => {
@@ -30,7 +40,24 @@ export const getList = (path: string) => {
     return {
       ...data,
       slug: file.replace(".md", ""),
-      createAt: data.date ? Number(new Date(data.date)) : null
+      createdAt: data.date ? Number(new Date(data.date)) : null
     };
   });
+};
+
+export const getFileBySlug = async (path: string, slug: string) => {
+  const directory = join(process.cwd(), path);
+  const fullPath = join(directory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf-8");
+  const { data, content: markdownContent } = matter(fileContents);
+  let content = "";
+  if (markdownContent) {
+    content = (await remark().use(html).process(markdownContent)).toString();
+  }
+  return {
+    ...data,
+    content,
+    slug,
+    createdAt: data.date ? Number(new Date(data.date)) : null
+  };
 };
