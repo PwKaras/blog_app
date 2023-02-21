@@ -3,7 +3,7 @@ import { Project } from "@/lib/markdownParser";
 import { getAllProjects } from "@/services/projects";
 import Head from "next/head";
 
-// Next execute getStaticProps in stage building app
+// Next execute getStaticProps in stage of the building app
 export const getStaticProps = () => {
   const allProjects = getAllProjects();
 

@@ -2,13 +2,13 @@ import { getList } from "@/lib/markdownParser";
 
 export const getAllProjects = () => {
   const projects = getList("src/_projects");
-  const projectWithCreateAt = projects.filter((project) => project.createAt);
-  const projectWithOutCreateAt = projects.filter((project) => !project.createAt);
-  const sortedProjects = projectWithCreateAt.sort((a, b) => b.createAt! - a.createAt!);
-  const sortedProjectsAndProjectWithoutCreateAtOnTheEndOfList = [
+  const projectWithCreatedAt = projects.filter((project) => project.createdAt);
+  const projectWithOutCreatedAt = projects.filter((project) => !project.createdAt);
+  const sortedProjects = projectWithCreatedAt.sort((a, b) => b.createdAt! - a.createdAt!);
+  const sortedProjectsAndProjectWithoutCreatedAtOnTheEndOfList = [
     ...sortedProjects,
-    ...projectWithOutCreateAt
+    ...projectWithOutCreatedAt
   ];
 
-  return sortedProjectsAndProjectWithoutCreateAtOnTheEndOfList;
+  return sortedProjectsAndProjectWithoutCreatedAtOnTheEndOfList;
 };
